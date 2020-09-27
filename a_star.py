@@ -59,7 +59,7 @@ class AStar:
     def SaveImage(self, plt):
         millis = int(round(time.time() * 1000))
         filename = './' + str(millis) + '.png'
-        plt.savefig(filename)
+        plt.savefig("png/"+filename)
 
     def ProcessPoint(self, x, y, parent):
         if not self.IsValidPoint(x, y):
@@ -97,8 +97,9 @@ class AStar:
             rec = Rectangle((p.x, p.y), 1, 1, color='g')
             ax.add_patch(rec)
             plt.draw()
-            self.SaveImage(plt)
+            #self.SaveImage(plt)
         end_time = time.time()
+        self.SaveImage(plt)
         print('===== Algorithm finish in', int(end_time-start_time), ' seconds')
 
     def RunAndSaveImage(self, ax, plt):
@@ -116,9 +117,11 @@ class AStar:
             p = self.open_set[index]
             rec = Rectangle((p.x, p.y), 1, 1, color='c')
             ax.add_patch(rec)
-            self.SaveImage(plt)
+    
+            
 
             if self.IsEndPoint(p):
+                #self.SaveImage(plt)
                 return self.BuildPath(p, ax, plt, start_time)
 
             del self.open_set[index]
